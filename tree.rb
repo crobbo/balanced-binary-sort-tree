@@ -1,4 +1,4 @@
-
+require 'pry'
 
 class Tree
 
@@ -8,30 +8,31 @@ class Tree
     @root = build_tree(array)
     @array = array
   end
-  
-  require 'pry'
+
   def insert(value)
 
     right_node = false
     left_node = false
-     
-    until @root.left.nil? || @root.right.nil?
-      binding.pry
+
+    new_root = @root
+
+    until new_root.left.nil? || new_root.right.nil?
+
       if value > @root.data
-        insert(@root.right)
+        new_root = new_root.right
         right_node = true
         left_node = false
       else
-        insert(@root.right)
+        new_root = new_root.left
         right_node = false
         left_node = true
       end
     end
-    
+
     if right_node
-      @root.right = Node.new(value)
+      new_root.right = Node.new(value)
     else
-      @root.left = Node.new(value)
+      new_root.left = Node.new(value)
     end
   end
 
