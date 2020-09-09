@@ -8,8 +8,32 @@
 require_relative "node.rb"
 require_relative "tree.rb"
 
-tree = Tree.new(Array.new(15) { rand(1...999) })
+tree = Tree.new(Array.new(20) { rand(1...999) })
+# tree = Tree.new([1,2,3, 5, 6,10,7,20,26,16])
 puts "\n BALANCED BINARY SEARCH TREE: \n\n"
 tree.pretty_print
+
+puts "\n INSERTING A NEW NODE (278): \n\n"
 tree.insert(278)
 tree.pretty_print
+
+puts "\n DELETING A NODE (3): \n\n"
+tree.delete(3)
+tree.pretty_print
+
+# puts "\n FIND A NODE: \n\n"
+# p tree.find(5)
+
+# puts "\n Level Order Traversal: \n"
+# p tree.level_order()
+
+# puts "\n Pre-Order Traversal: \n"
+# p tree.preorder
+
+# puts "\n In-Order Traversal: \n"
+# p tree.inorder
+
+# puts "\n Post-Order Traversal: \n"
+# p tree.postorder
+
+p tree.height
