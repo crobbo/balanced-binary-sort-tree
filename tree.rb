@@ -9,14 +9,31 @@ class Tree
     @array = array
   end
 
-  def height(current_node=root, count=0, results=[])
-    return nil if current_node.nil?
-    return results.push(count) if current_node.left.nil? && current_node.right.nil?
-    count += 1
-    left_side = height(current_node.left, count, results)
-    right_side = height(current_node.right, count,results)
-    result = results
-    result.max
+  def rebalance
+    self.root = build_tree(inorder)
+  end
+
+  def balanced?(current_node=root)
+    return true if current_node.nil?
+    left_height = height(current_node.left)
+    right_height = height(current_node.right)
+    return true if balanced?(current_node.left) && balanced?(current_node.right) && (left_height - right_height).abs <= 1
+  end
+
+  def depth(node, current_node=root, count=0)
+    if node
+      return count if current_node.nil? || node.data == current_node.data
+      count += 1
+      return depth(node, current_node.right, count) if node.data > current_node.data
+      return depth(node, current_node.left, count) if node.data < current_node.data
+    else
+      nil
+    end
+  end
+
+  def height(current_node)
+   return -1 if current_node.nil?
+   [height(current_node.left), height(current_node.right)].max + 1
   end
 
   def postorder(current_node=root, result = [])
